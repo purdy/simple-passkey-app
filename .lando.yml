@@ -1,0 +1,4 @@
+name: simple-passkey-app
+recipe: lamp
+config:
+  webroot: web
