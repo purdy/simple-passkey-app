@@ -2,3 +2,11 @@ name: simple-passkey-app
 recipe: lamp
 config:
   webroot: web
+services:
+  appserver:
+    xdebug: true
+tooling:
+  setupdb:
+    service: database
+    cmd:
+      - cd /app && /helpers/sql-import.sh initial-schema.sql
