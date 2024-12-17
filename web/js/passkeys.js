@@ -55,4 +55,32 @@ document.addEventListener('DOMContentLoaded', function() {
       console.log(e);
     }
   });
+
+  document.getElementById('login-btn').addEventListener('click', async (event) => {
+    event.preventDefault();
+    let response = await fetch('/backend-login-pre.php');
+    let data = await response.json();
+    helper.bta(data);
+    let credential = await navigator.credentials.get(data);
+    console.log(data);
+    console.log(credential);
+    let credential_data = {
+      id: credential.rawId ? helper.atb(credential.rawId) : null,
+      client: credential.response.clientDataJSON ? helper.atb(credential.response.clientDataJSON) : null,
+      auth: credential.response.authenticatorData ? helper.atb(credential.response.authenticatorData) : null,
+      sig: credential.response.signature ? helper.atb(credential.response.signature) : null,
+      user: credential.response.userHandle ? helper.atb(credential.response.userHandle) : null
+    };
+    let form_data = new FormData();
+    form_data.append('credential', JSON.stringify(credential_data));
+    response = await fetch('/backend-login.php', {
+      method: 'POST',
+      body: form_data
+    });
+    console.log(response);
+    data = await response.json();
+    if (data.result == 'success') {
+      window.location.href = '/dashboard.php';
+    }
+  });
 });

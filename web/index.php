@@ -28,7 +28,7 @@
       <div class="row">
         <div class="col">
           <p>Or if you've already created a passkey, log in below:</p>
-          <a href="backend-login.php" class="btn btn-primary">Log in with passkey</a>
+          <a href="backend-login.php" class="btn btn-primary" id="login-btn">Log in with passkey</a>
         </div>
       </div>
     </div>
