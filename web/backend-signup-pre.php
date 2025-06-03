@@ -16,7 +16,7 @@ $webauthn = new WebAuthn("Simple Passkey App", $domain);
 $_SESSION['email'] = strtolower(trim($_POST['email']));
 $_SESSION['unique_id'] = bin2hex(random_bytes(8));
 
-$response = $webauthn->getCreateArgs(\hex2bin($_SESSION['unique_id']), $_SESSION['email'], $_SESSION['email']);
+$response = $webauthn->getCreateArgs(\hex2bin($_SESSION['unique_id']), $_SESSION['email'], $_SESSION['email'], $allowUsb=true, $allowNfc=true, $allowBle=true, $allowHybrid=true, $allowInternal=true, $crossPlatformAttachment=true);
 $_SESSION['challenge'] = ($webauthn->getChallenge())->getBinaryString();
 
 echo json_encode($response);
